@@ -107,7 +107,7 @@ class Install {
 }
 
 // Perform the install
-Install::setup();
+//Install::setup();
 ?>
 
 <!doctype html>
@@ -115,6 +115,10 @@ Install::setup();
   <head>
     <meta charset="utf-8">
     <title>Installation</title>
+    <link rel="stylesheet" href="xyme/public/normalize.css">
+    <style type="text/css">
+      body { padding: 40px; }
+    </style>
   </head>
   <body>
     <h1>Installation Complete</h1>
