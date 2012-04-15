@@ -1,0 +1,4 @@
+All PHP should exist in this top level directory.
+Any public-facing images should be placed in xyme/public/img/
+
+"xyme" directory is meteor-only
