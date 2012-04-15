@@ -107,7 +107,7 @@ class Install {
 }
 
 // Perform the install
-//Install::setup();
+Install::setup();
 ?>
 
 <!doctype html>
