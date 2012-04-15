@@ -1,7 +1,14 @@
 <?php
+/**
+ * @file
+ * Example config file.
+ *
+ * Duplicate this file and rename to 'config.php' and fill out with valid
+ * database credentials for the site.
+ */
 $config = array(
   'db' => 'xyme',
   'user' => 'websys',
   'pass' => 'websys',
-  'salt' => 'f0sNlh5Ayh7OmOmro5ori5yU8U0VvH47796TdPQT'
+  'salt' => 'f0sNlh5Ayh7OmOmro5ori5yU8U0VvH47796TdPQT',
 );
