@@ -1,15 +1,25 @@
 <head>
-  <title>xyme</title>
+  <title>XYMe</title>
+  <link rel="stylesheet" href="normalize.css">
 </head>
 
 <body>
-  {{> hello}}
+  {{> messages}}
+  {{> input }}
 </body>
 
-<template name="hello">
-  <div class="hello">
-    <h1>Hello World!</h1>
-    {{greeting}}
-    <input type="button" value="Click" />
-  </div>
+<template name="messages">
+  <ul id="messages">
+    {{# each messages }}
+      {{> message }}
+    {{/ each }}
+  </ul>
+</template>
+
+<template name="message">
+  <li><b>{{ name }}:</b> {{ message }}</li>
+</template>
+
+<template name="input">
+  <p><input type="text" id="message" name="message" placeholder="Say something..."></p>
 </template>
