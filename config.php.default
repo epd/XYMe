@@ -1,0 +1,7 @@
+<?php
+$config = array(
+  'db' => 'xyme',
+  'user' => 'websys',
+  'pass' => 'websys',
+  'salt' => 'f0sNlh5Ayh7OmOmro5ori5yU8U0VvH47796TdPQT'
+);
