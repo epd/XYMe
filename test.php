@@ -1,6 +1,6 @@
 <?php
 include_once('user.php');
-//touch
+
 session_start();
 
 if( isset( $_POST['login'] ) && isset( $_POST['login-user'] ) && isset( $_POST['login-pass'] ) ){
