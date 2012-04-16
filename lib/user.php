@@ -127,7 +127,7 @@ class User {
 	*
 	*/
 	private function performLogin ( $dbconn, $user, $pass ){
-		require __DIR__ . '/config.php';
+		require __DIR__ . '\..\config.php';
 		
 		$salted = sha1($config['salt'] . $pass);
 
@@ -169,7 +169,7 @@ class User {
 	*
 	*/
 	private function storeUser ( $dbconn, $user, $pass, $group ){
-		require __DIR__ . '/config.php';
+		require __DIR__ . '\..\config.php';
 		
 		$salted = sha1($config['salt'] . $pass);
 
@@ -192,7 +192,7 @@ class User {
 	*
 	*/
 	private function checkUsernameTaken( $dbconn, $user ){
-		require __DIR__ . '/config.php';
+		require __DIR__ . '\..\config.php';
 
 		$taken_stmt = $dbconn->prepare('SELECT * FROM users WHERE username=:username');
 		$taken_stmt->execute(array(
