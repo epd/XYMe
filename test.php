@@ -1,5 +1,5 @@
 <?php
-include_once('user.php');
+include_once __DIR__ . '/lib/user.php';
 
 session_start();
 

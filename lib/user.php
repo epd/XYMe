@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__ . '/lib/database.php';
+include_once __DIR__ . '\database.php';
 
 class User {
 
