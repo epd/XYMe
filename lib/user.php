@@ -5,11 +5,11 @@ class User {
 
 	/**
 	* Implements login().
-	*
+	* 
 	* @param $user
-	* The username.
+	* The users username.
 	* @param $pass
-	* The password
+	* The users password
 	*/
 	public static function login ( $user, $pass ){
 		
