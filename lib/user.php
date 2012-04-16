@@ -9,7 +9,7 @@ class User {
 	* @param $user
 	* The users username.
 	* @param $pass
-	* The users password
+	* The users password.
 	*/
 	public static function login ( $user, $pass ){
 		
