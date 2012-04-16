@@ -30,17 +30,13 @@ if (Meteor.is_client) {
 
   Meteor.startup(function () {
     // Parse our cookie to grab username
-    var cookie = document.cookie.split('&');
+    var cookie = document.cookie.split('; ');
     for (var c in cookie) {
-      var data = cookie[c].split('=');
+      var data = unescape(cookie[c]).split('=');
 
-      // Grab our name
-      if (data[0] === 'name') {
+      // Grab our username
+      if (data[0] === 'xyme_user') {
         Session.set('name', data[1]);
-      }
-      // Grab user ID
-      if (data[0] === "id") {
-        Session.set('id', data[1]);
       }
     }
   });

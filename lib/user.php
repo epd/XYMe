@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__ . '\database.php';
+include_once __DIR__ . '/database.php';
 
 class User {
 
@@ -32,6 +32,9 @@ class User {
 		unset( $_SESSION['user'] );
 		unset( $_SESSION['uid'] );
 		unset( $_SESSION['gid'] );
+		setcookie("xyme_user", FALSE, time() - 3600, '/');
+		setcookie("xyme_uid", FALSE, time() - 3600, '/');
+		setcookie("xyme_gid", FALSE, time() - 3600, '/');
 		session_destroy();	
 	}
 	
@@ -111,7 +114,7 @@ class User {
 	* Implements connect().
 	*
 	*/
-	private function connect() {
+	private static function connect() {
 		return Database::connect();
 	}
 	
@@ -126,8 +129,8 @@ class User {
 	* The users password
 	*
 	*/
-	private function performLogin ( $dbconn, $user, $pass ){
-		require __DIR__ . '\..\config.php';
+	private static function performLogin ( $dbconn, $user, $pass ){
+		require __DIR__ . '/../config.php';
 		
 		$salted = sha1($config['salt'] . $pass);
 
@@ -144,6 +147,9 @@ class User {
 			$_SESSION['user'] = $row['username'];
 			$_SESSION['uid'] = $row['user_id'];
 			$_SESSION['gid'] = $row['group_id'];
+			setcookie("xyme_user", $_SESSION['user'], time() + 3600, '/');
+			setcookie("xyme_uid", $_SESSION['gid'], time() + 3600, '/');
+			setcookie("xyme_gid", $_SESSION['gid'], time() + 3600, '/');
 			return 0;
 		}
 		else {
@@ -151,6 +157,9 @@ class User {
 			unset( $_SESSION['uid'] );
 			unset( $_SESSION['gid'] );
 			session_destroy();
+			setcookie("xyme_user", FALSE, time() - 3600, '/');
+			setcookie("xyme_uid", FALSE, time() - 3600, '/');
+			setcookie("xyme_gid", FALSE, time() - 3600, '/');
 			return 1;		
 		}		
 	}
@@ -168,8 +177,8 @@ class User {
 	* The users group
 	*
 	*/
-	private function storeUser ( $dbconn, $user, $pass, $group ){
-		require __DIR__ . '\..\config.php';
+	private static function storeUser ( $dbconn, $user, $pass, $group ){
+		require __DIR__ . '/../config.php';
 		
 		$salted = sha1($config['salt'] . $pass);
 
@@ -191,8 +200,8 @@ class User {
 	* The users username.
 	*
 	*/
-	private function checkUsernameTaken( $dbconn, $user ){
-		require __DIR__ . '\..\config.php';
+	private static function checkUsernameTaken( $dbconn, $user ){
+		require __DIR__ . '/../config.php';
 
 		$taken_stmt = $dbconn->prepare('SELECT * FROM users WHERE username=:username');
 		$taken_stmt->execute(array(
