@@ -19,8 +19,10 @@ class User {
 		//Performs Login
 		if( self::performLogin( $dbconn, $user, $pass ) ){
 			echo 'Invalid username and/or password';
+			self::getLocation();
 			return 1;
 		}	
+		self::getLocation();
 		return 0;		
 	}
 	
@@ -214,5 +216,33 @@ class User {
 		
 		return 0;	
 	}
+	
+	/**
+	* Implements getLocation().
+	*
+	*/
+	private static function getLocation(){
+		
+		//Find IP address
+		$ip = $_SERVER['REMOTE_ADDR'];
+		
+		//Loopback IP due to Apache Fallback
+		if( $ip == '127.0.0.1' )
+			$ip = $hosts=gethostbynamel('');
+		
+		$location = (unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$ip)));
+		$_SESSION['city'] = $location['geoplugin_city'];
+		$_SESSION['state'] = $location['geoplugin_region'];
+		$_SESSION['latitude'] = $location['geoplugin_latitude'];
+		$_SESSION['longitude'] = $location['geoplugin_longitude'];
+		setcookie("xyme_city", $_SESSION['city'], time() + 3600, '/');
+		setcookie("xyme_state", $_SESSION['state'], time() + 3600, '/');
+		setcookie("xyme_latitude", $_SESSION['latitude'], time() + 3600, '/');
+		setcookie("xyme_longitude", $_SESSION['longitude'], time() + 3600, '/');
+	
+	}
+	
+	
+	
 }
 ?>
