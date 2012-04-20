@@ -43,11 +43,16 @@ class Install {
     $groups_stmt = $dbconn->prepare('create table groups (group_id int(11) not
       null auto_increment primary key, name varchar(255))');
 
+    // Create our rooms table
+    $rooms_stmt = $dbconn->prepare('create table rooms (room_id int(11) not null
+      auto_increment primary key, latitude double, longitude double)');
+
     // Creat our users table
     $users_stmt = $dbconn->prepare('create table users (user_id int(11) not null
-      auto_increment primary key, group_id int(11), username varchar(255),
-      password varchar(255), foreign key (group_id) references groups(group_id))
-    ');
+      auto_increment primary key, group_id int(11), room_id int(11), username
+      varchar(255), password varchar(255), latitude double, longitude double,
+      foreign key (group_id) references groups(group_id), foreign key (room_id)
+      references rooms(room_id))');
 
     // Create our roles table
     $roles_stmt = $dbconn->prepare('create table roles (role_id int(11) not
@@ -61,6 +66,7 @@ class Install {
 
     // Go ahead and execute our statements
     $groups_stmt->execute();
+    $rooms_stmt->execute();
     $users_stmt->execute();
     $roles_stmt->execute();
     $gr_map_stmt->execute();
@@ -97,12 +103,27 @@ class Install {
 
     // Insert our admin account
     $admin_stmt = $dbconn->prepare('insert into users values(null, :groupid,
-      :username, :password)');
+      null, :username, :password, null, null)');
     $admin_stmt->execute(array(
       ':groupid' => 1,
       ':username' => $user,
       ':password' => $salted,
     ));
+  }
+
+  /**
+   * Implements addStoredProcedures().
+   *
+   * @param $dbconn
+   * The databse connection resource.
+   */
+  static private function addStoredProcedures($dbconn) {
+    $room_stmt = $dbconn->prepare('
+      create procedure join_room (in p_x double, in p_y double)
+      begin
+
+      end;
+    ');
   }
 }
 

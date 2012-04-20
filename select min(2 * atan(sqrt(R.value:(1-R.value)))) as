@@ -1,0 +1,6 @@
+select 3959 * min(2 * atan(sqrt(R.value/(1-R.value)))) as distance, R.room_id
+from
+(
+  select pow(sin(radians(:lat-a.lat)/2), 2) + cos(radians(x)) * cos(radians(a.lat)) * pow(sin(radians(:long -a.long)/2), 2) as value, a.room_id
+  from rooms a
+) as R
