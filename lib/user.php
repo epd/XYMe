@@ -22,7 +22,7 @@ class User {
 			self::getLocation();
 			return 1;
 		}	
-		self::getLocation();
+		self::getLocation( $dbconn );
 		return 0;		
 	}
 	
@@ -221,7 +221,7 @@ class User {
 	* Implements getLocation().
 	*
 	*/
-	private static function getLocation(){
+	private static function getLocation( $dbconn ){
 		
 		//Find IP address
 		$ip = $_SERVER['REMOTE_ADDR'];
@@ -231,14 +231,24 @@ class User {
 			$ip = $hosts=gethostbynamel('');
 		
 		$location = (unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$ip)));
+		
+		//Set session variables
 		$_SESSION['city'] = $location['geoplugin_city'];
 		$_SESSION['state'] = $location['geoplugin_region'];
 		$_SESSION['latitude'] = $location['geoplugin_latitude'];
 		$_SESSION['longitude'] = $location['geoplugin_longitude'];
+		
+		//Set cookies
 		setcookie("xyme_city", $_SESSION['city'], time() + 3600, '/');
 		setcookie("xyme_state", $_SESSION['state'], time() + 3600, '/');
 		setcookie("xyme_latitude", $_SESSION['latitude'], time() + 3600, '/');
 		setcookie("xyme_longitude", $_SESSION['longitude'], time() + 3600, '/');
+		
+		//Add to database
+		$taken_stmt = $dbconn->prepare('UPDATE users SET latitude=:latitude, longitude=:longitude WHERE username = :user');
+		$taken_stmt->execute(array(
+		  ':latitude' => $_SESSION['latitude'], ':longitude' => $_SESSION['longitude'], ':user' => $_SESSION['user']
+		));
 	
 	}
 	
