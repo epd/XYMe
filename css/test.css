@@ -6,18 +6,15 @@ html,body,body div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,ad
 
 html, body {
   height: 920px;
-  width: 640px;
 }
 #main-container {
   height: 960px;
-  width: 640px;
   background-image: url(../img/clean_textile.png);
   background-repeat: repeat;
   border: 1px solid #000;
 }
 header {
   height: 86px;
-  width: 640px;
   background: rgb(72,184,175); /* Old browsers */
   background: -moz-linear-gradient(top, rgb(72,184,175) 0%, rgb(55,139,134) 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(72,184,175)), color-stop(100%,rgb(55,139,134))); /* Chrome,Safari4+ */
@@ -30,7 +27,6 @@ header {
 }
 #header-container {
   height: 50px;
-  width: 600px;
   background-image: url(../img/grid.png);
   padding: 18px 20px;
 }

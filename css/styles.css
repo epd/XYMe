@@ -10,7 +10,6 @@ html, body {
 }
 #main-wrapper {
   display: block;
-  width: 520px;
   height: 100%;
   margin: 0 auto;
   line-height: 100%;

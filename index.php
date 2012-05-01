@@ -19,6 +19,7 @@ else {
 <!doctype html>
 <html>
   <head>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="css/test.css"/>
   </head>
   <body>
