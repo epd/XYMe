@@ -111,8 +111,6 @@ class User {
 	/**
 	* Implements closestRooms().
 	*
-	*@param $count
-	* Number of rooms to return
 	*@return
 	* Array of 5 closest rooms
 	*
@@ -128,7 +126,7 @@ class User {
 							POW(69.1 * (latitude - :startlat ), 2) +
 							POW(69.1 * ( :startlng - longitude) * COS(latitude / 57.3), 2)) AS distance
 						FROM rooms 
-						ORDER BY distance
+						ORDER BY distance ASC
 						LIMIT 5
 					");
 		$rooms_stmt->execute(array(
@@ -139,6 +137,13 @@ class User {
 		return $rooms_stmt->fetchAll();	
 	}
 	
+	/**
+	* Implements createRoom().
+	*
+	*@param $room_name
+	* Name of room
+	*
+	*/
 	public static function createRoom( $room_name ){
 	
 		//Connects to Database
@@ -152,9 +157,9 @@ class User {
 		$rooms_stmt->execute(array(
 		  ':name' => $room_name,
 		  ':lat' => $_SESSION['latitude'],
-		  ':lng' => $_SESSION['longitude'],
-		  
-		));		
+		  ':lng' => $_SESSION['longitude'],		  
+		));	
+
 	}
 		
 	//---------------------------------------------------------------
