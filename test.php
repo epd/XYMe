@@ -50,9 +50,11 @@ if( isset( $_POST['create'] ) &&  isset( $_POST['create-name'] ) ){
 	</div>
 <?php } else { ?>
 	Welcome, <?php echo $_SESSION['user'] ?>.
-	<form action="test.php" method="post"> 
+	<form action="test.php" method="post"> 		
+		<input type='submit' value='Logout' name='logout'>
+	</form>
 	
-		<div id='create'>
+			<div id='create'>
 			<form action="test.php" method="post"> 
 				<label>Room Name:</label><input type='text' name='create-name'>
 				<input type='submit' value='Create' name='create'>
@@ -70,9 +72,6 @@ if( isset( $_POST['create'] ) &&  isset( $_POST['create-name'] ) ){
 					
 			?>
 		</div>
-		
-		<input type='submit' value='Logout' name='logout'>
-	</form>
 <?php } ?>
 	
 	
