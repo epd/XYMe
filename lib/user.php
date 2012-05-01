@@ -225,13 +225,12 @@ class User {
 		
 		//Find IP address
 		$ip = $_SERVER['REMOTE_ADDR'];
-		
+
 		//Loopback IP due to Apache Fallback
-		if( $ip == '127.0.0.1' )
-			$ip = $hosts=gethostbynamel('');
-		
+		if( $ip == '127.0.0.1' || $ip == '::1' )
+      $ip = $hosts=gethostbynamel('');
 		$location = (unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$ip)));
-		
+
 		//Set session variables
 		$_SESSION['city'] = $location['geoplugin_city'];
 		$_SESSION['state'] = $location['geoplugin_region'];

@@ -8,11 +8,7 @@ if(isset($_POST['login'])) {
 }
 
 if(User::verifySession()) {
-?>
-<script type="text/javascript">
-location.href='http://localhost:3000';
-</script>
-<?php
+  header("Location: http://" . $_SERVER['SERVER_NAME'] . ":3000/");
 }
 else {
 ?>
