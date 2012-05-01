@@ -107,6 +107,55 @@ class User {
 		
 		return 1;	
 	}
+	
+	/**
+	* Implements closestRooms().
+	*
+	*@param $count
+	* Number of rooms to return
+	*@return
+	* Array of 5 closest rooms
+	*
+	*/
+	public static function closestRooms(){
+	
+		//Connects to Database
+		$dbconn = self::connect();
+		
+		//Query for rooms
+		$rooms_stmt = $dbconn->prepare("
+						SELECT room_id, room_name, latitude, longitude, SQRT(
+							POW(69.1 * (latitude - :startlat ), 2) +
+							POW(69.1 * ( :startlng - longitude) * COS(latitude / 57.3), 2)) AS distance
+						FROM rooms 
+						ORDER BY distance
+						LIMIT 5
+					");
+		$rooms_stmt->execute(array(
+		  ':startlat' => $_SESSION['latitude'],
+		  ':startlng' => $_SESSION['longitude'],
+		));	
+	
+		return $rooms_stmt->fetchAll();	
+	}
+	
+	public static function createRoom( $room_name ){
+	
+		//Connects to Database
+		$dbconn = self::connect();
+		
+		//Query for rooms
+		$rooms_stmt = $dbconn->prepare('
+						INSERT INTO	rooms ( room_name, latitude, longitude )
+						  VALUES ( :name, :lat, :lng )
+					');
+		$rooms_stmt->execute(array(
+		  ':name' => $room_name,
+		  ':lat' => $_SESSION['latitude'],
+		  ':lng' => $_SESSION['longitude'],
+		  
+		));		
+	}
 		
 	//---------------------------------------------------------------
 	//------------------- Private Funcitons -------------------------
@@ -225,13 +274,12 @@ class User {
 		
 		//Find IP address
 		$ip = $_SERVER['REMOTE_ADDR'];
-		
+
 		//Loopback IP due to Apache Fallback
-		if( $ip == '127.0.0.1' )
+		if( $ip == '127.0.0.1' || $ip == '::1' )
 			$ip = $hosts=gethostbynamel('');
-		
 		$location = (unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$ip)));
-		
+
 		//Set session variables
 		$_SESSION['city'] = $location['geoplugin_city'];
 		$_SESSION['state'] = $location['geoplugin_region'];

@@ -45,7 +45,7 @@ class Install {
 
     // Create our rooms table
     $rooms_stmt = $dbconn->prepare('create table rooms (room_id int(11) not null
-      auto_increment primary key, latitude double, longitude double)');
+      auto_increment primary key, room_name varchar(20), latitude double, longitude double)');
 
     // Creat our users table
     $users_stmt = $dbconn->prepare('create table users (user_id int(11) not null
