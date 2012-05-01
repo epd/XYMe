@@ -238,7 +238,7 @@ class User {
 		
 		$salted = sha1($config['salt'] . $pass);
 
-		$register_stmt = $dbconn->prepare('insert into users values(null, :groupid,
+		$register_stmt = $dbconn->prepare('insert into users (group_id, username, password) values( :groupid,
 		  :username, :password)');
 		$register_stmt->execute(array(
 		  ':groupid' => $group,
