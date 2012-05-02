@@ -27,6 +27,12 @@ if( isset( $_POST['create'] ) &&  isset( $_POST['create-name'] ) ){
 	echo 'Room Created<br />';
 
 }
+
+if( isset( $_POST['join'] ) ){
+
+	User::joinRoom( $_POST['room_id'] );
+
+}
 	
 
 ?>
@@ -70,11 +76,37 @@ if( isset( $_POST['create'] ) &&  isset( $_POST['create-name'] ) ){
 				$rooms = User::closestRooms();
 				
 				foreach( $rooms as $row ){
+					echo "<form action='test.php' method='post'>";
 					echo $row['room_name'].' - Distance: '.$row['distance'].' miles<br />';							
+					if( $_SESSION['room_id'] == null  || !in_array( $row['room_id'], $_SESSION['room_id'] ) ){ 
+						echo "<input type='hidden' name='room_id' value='".$row['room_id']."'>";
+						echo "<input type='submit' name='join' value='Join Room'>";
+					}
+					echo "</form>";
 				}
 					
 			?>
 		</div>
+		
+		<div id='current'>
+			<?php
+				
+				if( $_SESSION['room_id'] != null ){
+					echo 'Current Room IDs:';
+					foreach( $_SESSION['room_id'] as $row ){
+						echo "<form action='test.php' method='post'>";
+						echo $row;							
+						//if( $_SESSION['room_id'] == null  || !in_array( $row['room_id'], $_SESSION['room_id'] ) ){ 
+						//	echo "<input type='hidden' name='room_id' value='".$row['room_id']."'>";
+						//	echo "<input type='submit' name='join' value='Join Room'>";
+						//}
+						echo "</form>";
+					}
+				}					
+			?>
+		</div>
+		
+		
 <?php } ?>
 
 <script>
