@@ -26,7 +26,9 @@ if (Meteor.is_client) {
         e.target.focus();
 
         // Make sure we scroll to the bottom
-        $(document).scrollTop($("#main-container").height());
+        setTimeout(function () {
+          $(document).scrollTop($("#main-container").height());
+        }, 100);
       }
     }
   };
