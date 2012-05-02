@@ -3,10 +3,13 @@ include_once __DIR__ . '/lib/user.php';
 
 session_start();
 
-if(isset($_POST['login'])) {
+$login = null;
+$register = null;
+
+if( isset($_POST['login']) && $_POST['login'] == 'Login' ) {
   $login = User::login($_POST['username'], $_POST['password']);
 }
-if(isset($_POST['register'])) {
+if( isset($_POST['register']) && $_POST['register'] == 'Register' ) {
   $register = User::register($_POST['username'], $_POST['password'], 1);
 }
 
