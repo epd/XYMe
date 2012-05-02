@@ -18,10 +18,10 @@ class User {
 		
 		//Performs Login
 		if( self::performLogin( $dbconn, $user, $pass ) ){
-			//self::getLocation();
+			//Login Failed
 			return 'Invalid username and/or password';
 		}	
-		//self::getLocation( $dbconn );	
+		self::getLocation( $dbconn );	
 	}
 	
 	/**

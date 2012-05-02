@@ -66,8 +66,7 @@ if( isset( $_POST['create'] ) &&  isset( $_POST['create-name'] ) ){
 				$rooms = User::closestRooms();
 				
 				foreach( $rooms as $row ){
-					echo $row['room_name'].' - Distance: '.$row['distance'].' miles<br />';
-							
+					echo $row['room_name'].' - Distance: '.$row['distance'].' miles<br />';							
 				}
 					
 			?>
