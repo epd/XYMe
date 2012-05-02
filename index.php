@@ -2,12 +2,18 @@
 include_once __DIR__ . '/lib/user.php';
 
 session_start();
+echo '<pre>';
+print_r($_POST);
+echo '</pre>';
 
 if(isset($_POST['login'])) {
   $login = User::login($_POST['username'], $_POST['password']);
 }
 if(isset($_POST['register'])) {
   $register = User::register($_POST['username'], $_POST['password'], 1);
+}
+if(isset($_POST['logout'])) {
+  User::logout();
 }
 
 if(User::verifySession()) {

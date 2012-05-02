@@ -31,8 +31,8 @@
     <div class="push">
     </div>
     {{> messages}}
-    {{> input }}
   </div>
+  {{> input }}
 </body>
 
 <template name="messages">
@@ -46,11 +46,17 @@
 <template name="message">
   <li>
     <img class="left avatar" src="img/wongm3.jpg"/>
-    <div class="left">
-      <section class="user">
-        <b>{{ name }}</b>
+    <div class="message-container left">
+      <section class="message-upper left">
+        <section class="user left">
+          <b>{{ name }}</b>
+        </section>
+        <section class="right">
+          <img src="img/time.png"/>
+          <span class="timestamp">{{ time }}</span>
+        </section>
       </section>
-      <section class="message">
+      <section class="message clear">
         {{ message }}
       </section>
     </div>
@@ -60,5 +66,7 @@
 </template>
 
 <template name="input">
-  <p><input type="text" id="message" name="message" placeholder="Say something..."></p>
+  <p id="input">
+    <input type="text" id="message" name="message" placeholder="Say something...">
+  </p>
 </template>

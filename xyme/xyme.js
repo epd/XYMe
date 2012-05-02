@@ -60,7 +60,7 @@ if (Meteor.is_client) {
 		time: new Date()
 	});
 	
-	var mapOptions = {
+	/*var mapOptions = {
 		center: new google.maps.LatLng(Session.get('latitude'), Session.get('longitude')),
 		zoom: 14,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -73,12 +73,28 @@ if (Meteor.is_client) {
 	  position: mapOptions.center,
 	  map: map,
 	  title: "Hello, bitches!"	
-	});
+	});*/
 
     // Make sure we scroll to the bottom
     setTimeout(function () {
       $(document).scrollTop($("#main-container").height());
     }, 500);
+   $(document).on('click', '#button-left', function(e) {
+
+      var form = document.createElement("form");
+      form.setAttribute("method", "post");
+      form.setAttribute("action", "http://129.161.32.148:8888/xyme");
+
+      var hiddenField = document.createElement("input");
+      hiddenField.setAttribute("type", "hidden");
+      hiddenField.setAttribute("name", "logout");
+      hiddenField.setAttribute("value", 1);
+
+      form.appendChild(hiddenField);
+
+      document.body.appendChild(form);
+      //form.submit();
+    });
   });
 }
 

@@ -9,17 +9,25 @@ html, body {
   height: 100%;
   background-image: url(../img/clean_textile.png);
 }
+body {
+  padding-top: 87px;
+}
 #main-container {
   min-height: 100%;
   height: auto !important;
   height: 100%;
   width: 960px;
   margin: -87px auto 0;
+  padding-bottom: 93px;
 }
 .push {
   height: 87px;
 }
 header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 86px;
   background: rgb(72,184,175); /* Old browsers */
   background: -moz-linear-gradient(top, rgb(72,184,175) 0%, rgb(55,139,134) 100%); /* FF3.6+ */
@@ -101,12 +109,14 @@ header h1 {
 #messages {
   width: 920px;
   margin: 0 20px;
+  -moz-box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
 #messages li {
   background-color: #ffffed;
   padding: 20px;
-  border-top: 1px solid #000;
+  border-top: 1px solid #ededed;
 }
 #messages li:first-child {
   border: 0;
@@ -114,8 +124,8 @@ header h1 {
 
 .avatar {
   margin-right: 20px;
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
@@ -126,9 +136,40 @@ header h1 {
   margin-bottom: 10px;
 }
 .message {
-  font: 18px'Quattrocento Sans', sans-serif;
+  font: 18px 'Quattrocento Sans', sans-serif;
 }
-
+#input input {
+  width: 904px;
+  display: block;
+  margin: 1.25em auto;
+  padding: 4px 8px;
+  height: 42px;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  font-size: 1.3em;
+  color: #555;  
+}
+#input {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #999;
+  -moz-box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+.timestamp {
+  line-height: 22px;
+  vertical-align: bottom;
+}
+.message-upper {
+  width: 100%;
+}
+.message-container {
+  width: 820px;
+}
 .left {
   float: left;
 }
