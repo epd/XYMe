@@ -2,9 +2,7 @@
 include_once __DIR__ . '/lib/user.php';
 
 session_start();
-echo '<pre>';
-print_r($_POST);
-echo '</pre>';
+setcookie("xyme_php_path", "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'], time() + 3600, '/');
 
 $login = null;
 $register = null;

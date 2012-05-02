@@ -45,20 +45,23 @@ if (Meteor.is_client) {
       if (data[0] === 'xyme_user') {
         Session.set('name', data[1]);
       }
-	  if (data[0] === 'xyme_latitude') {
-		Session.set('latitude', data[1]);
-	  }
-	  if (data[0] === 'xyme_longitude') {
-		Session.set('longitude', data[1]);
-	  }
+	    if (data[0] === 'xyme_latitude') {
+		    Session.set('latitude', data[1]);
+	    }
+	    if (data[0] === 'xyme_longitude') {
+		    Session.set('longitude', data[1]);
+	    }
+      if (data[0] === 'xyme_php_path') {
+        Session.set('php_path', data[1]);
+      }
     }
 
-	Locations.insert({
-		user: Session.get('name'),
-		latitude: Session.get('latitude'),
-		longitude: Session.get('longitude'),
-		time: new Date()
-	});
+  	Locations.insert({
+  		user: Session.get('name'),
+  		latitude: Session.get('latitude'),
+  		longitude: Session.get('longitude'),
+  		time: new Date()
+  	});
 	
 	/*var mapOptions = {
 		center: new google.maps.LatLng(Session.get('latitude'), Session.get('longitude')),
@@ -80,11 +83,13 @@ if (Meteor.is_client) {
     setTimeout(function () {
       $(document).scrollTop($("#main-container").height());
     }, 500);
-   $(document).on('click', '#button-left', function(e) {
+
+    // Click to logout
+    $(document).on('click', '#button-left', function(e) {
 
       var form = document.createElement("form");
       form.setAttribute("method", "post");
-      form.setAttribute("action", "http://129.161.32.148:8888/xyme");
+      form.setAttribute("action", Session.get('php_path'));
 
       var hiddenField = document.createElement("input");
       hiddenField.setAttribute("type", "hidden");
@@ -94,7 +99,7 @@ if (Meteor.is_client) {
       form.appendChild(hiddenField);
 
       document.body.appendChild(form);
-      //form.submit();
+      form.submit();
     });
   });
 }
