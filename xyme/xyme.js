@@ -1,9 +1,11 @@
 // Our collection via MongoDB
 Messages = new Meteor.Collection("messages");
+Locations = new Meteor.Collection("locations");
 
 if (Meteor.is_client) {
   // Expose object to the client
   window.Messages = Messages;
+  window.Locations = Locations;
 
   // Return all of our messages in order of time
   Template.messages.messages = function () {
@@ -43,7 +45,35 @@ if (Meteor.is_client) {
       if (data[0] === 'xyme_user') {
         Session.set('name', data[1]);
       }
+	  if (data[0] === 'xyme_latitude') {
+		Session.set('latitude', data[1]);
+	  }
+	  if (data[0] === 'xyme_longitude') {
+		Session.set('longitude', data[1]);
+	  }
     }
+
+	Locations.insert({
+		user: Session.get('name'),
+		latitude: Session.get('latitude'),
+		longitude: Session.get('longitude'),
+		time: new Date()
+	});
+	
+	var mapOptions = {
+		center: new google.maps.LatLng(Session.get('latitude'), Session.get('longitude')),
+		zoom: 14,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+	
+	var map = new google.maps.Map(document.getElementById("map_canvas"),
+        mapOptions);
+	
+	var marker = new google.maps.Marker({
+	  position: mapOptions.center,
+	  map: map,
+	  title: "Hello, bitches!"	
+	});
 
     // Make sure we scroll to the bottom
     setTimeout(function () {
