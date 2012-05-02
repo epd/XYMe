@@ -21,7 +21,6 @@ class User {
 			//Login Failed
 			return 'Invalid username and/or password';
 		}	
-		//self::getLocation( $dbconn );	
 	}
 	
 	/**
@@ -32,10 +31,14 @@ class User {
 		unset( $_SESSION['user'] );
 		unset( $_SESSION['uid'] );
 		unset( $_SESSION['gid'] );
+		unset( $_SESSION['latitude'] );
+		unset( $_SESSION['longitude'] );
+		session_destroy();
 		setcookie("xyme_user", FALSE, time() - 3600, '/');
 		setcookie("xyme_uid", FALSE, time() - 3600, '/');
 		setcookie("xyme_gid", FALSE, time() - 3600, '/');
-		session_destroy();	
+		setcookie("xyme_latitude", FALSE, time() - 3600, '/');
+		setcookie("xyme_longitude", FALSE, time() - 3600, '/');
 	}
 	
 	/**
@@ -197,6 +200,8 @@ class User {
 			$_SESSION['user'] = $row['username'];
 			$_SESSION['uid'] = $row['user_id'];
 			$_SESSION['gid'] = $row['group_id'];
+			$_SESSION['latitude'] = $_COOKIE['xyme_latitude'];
+			$_SESSION['longitude'] = $_COOKIE['xyme_longitude'];
 			setcookie("xyme_user", $_SESSION['user'], time() + 3600, '/');
 			setcookie("xyme_uid", $_SESSION['gid'], time() + 3600, '/');
 			setcookie("xyme_gid", $_SESSION['gid'], time() + 3600, '/');
@@ -206,10 +211,14 @@ class User {
 			unset( $_SESSION['user'] );
 			unset( $_SESSION['uid'] );
 			unset( $_SESSION['gid'] );
+			unset( $_SESSION['latitude'] );
+			unset( $_SESSION['longitude'] );
 			session_destroy();
 			setcookie("xyme_user", FALSE, time() - 3600, '/');
 			setcookie("xyme_uid", FALSE, time() - 3600, '/');
 			setcookie("xyme_gid", FALSE, time() - 3600, '/');
+			setcookie("xyme_latitude", FALSE, time() - 3600, '/');
+			setcookie("xyme_longitude", FALSE, time() - 3600, '/');
 			return 1;		
 		}		
 	}
