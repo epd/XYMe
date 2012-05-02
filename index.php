@@ -106,6 +106,33 @@ if(User::verifySession()) {
     </div>
   </body>
 </html>
+
+<script>
+	// Sets Geolocation
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+	} 
+		//Get the latitude and the longitude;
+	function successFunction(position) {
+		var lat = position.coords.latitude;
+		var lng = position.coords.longitude;
+		setCookie( 'xyme_latitude', lat, 1 );
+		setCookie( 'xyme_longitude', lng, 1 );
+	}
+	function errorFunction(){
+		alert("Geocoder failed");
+	}
+	
+	function setCookie(c_name,value,exdays)
+	{
+	var exdate=new Date();
+	exdate.setDate(exdate.getDate() + exdays);
+	var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+	document.cookie=c_name + "=" + c_value;
+	}	
+</script>
+
+
 <script type="text/javascript">
   <?php
     if(isset($_POST['register'])) {
