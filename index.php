@@ -112,19 +112,22 @@ if(User::verifySession()) {
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
 	} 
-		//Get the latitude and the longitude;
+	
+	//Get the latitude and the longitude;
 	function successFunction(position) {
 		var lat = position.coords.latitude;
 		var lng = position.coords.longitude;
 		setCookie( 'xyme_latitude', lat, 1 );
 		setCookie( 'xyme_longitude', lng, 1 );
 	}
+	
+	//Error - Your Browser Sucks
 	function errorFunction(){
 		alert("Geocoder failed");
 	}
 	
-	function setCookie(c_name,value,exdays)
-	{
+	//Sets Cookie
+	function setCookie(c_name,value,exdays){
 	var exdate=new Date();
 	exdate.setDate(exdate.getDate() + exdays);
 	var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
