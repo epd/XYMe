@@ -112,7 +112,7 @@ class User {
 	* Implements closestRooms().
 	*
 	*@return
-	* Array of 5 closest rooms
+	* Array of 5 closest rooms, distance is in MILES
 	*
 	*/
 	public static function closestRooms(){
