@@ -44,7 +44,19 @@
 </template>
 
 <template name="message">
-  <li><b>{{ name }}:</b> {{ message }}</li>
+  <li>
+    <img class="left avatar" src="img/wongm3.jpg"/>
+    <div class="left">
+      <section class="user">
+        <b>{{ name }}</b>
+      </section>
+      <section class="message">
+        {{ message }}
+      </section>
+    </div>
+    <div class="clear">
+    </div>
+  </li>
 </template>
 
 <template name="input">

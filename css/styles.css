@@ -36,7 +36,7 @@ header {
   padding: 18px 20px;
 }
 #header-container {
-  width: 920px;
+  width: 940px;
   margin: 0 auto;
 }
 header h1 {
@@ -134,6 +134,11 @@ header h1 {
   color: #333;
   font-weight: bold;
   font-size: 16px;
+}
+.error {
+  color: #f00;
+  font-weight: bold;
+  text-align: center;
 }
 .user-form div.text input,
 .user-form div.password input {

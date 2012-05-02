@@ -5,7 +5,7 @@ $(document).ready(function() {
     $("#login").show();
   });
 
-  /* Add Link modal firing ----- */
+  /* Register modal firing ----- */
   $("#register-button").click(function(e) {
     $("#login").hide();
     $("#register").show();

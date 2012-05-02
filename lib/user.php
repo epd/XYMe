@@ -18,12 +18,10 @@ class User {
 		
 		//Performs Login
 		if( self::performLogin( $dbconn, $user, $pass ) ){
-			echo 'Invalid username and/or password';
-			self::getLocation();
-			return 1;
+			//self::getLocation();
+			return 'Invalid username and/or password';
 		}	
-		self::getLocation( $dbconn );
-		return 0;		
+		//self::getLocation( $dbconn );	
 	}
 	
 	/**
@@ -58,25 +56,21 @@ class User {
 		
 		//Makes sure all variables set
 		if( $user == null || $pass == null || $group == null ){
-			echo 'Please Fill in all Fields';
-			return 1;
+			return 'Please Fill in all Fields';
 		}
 		
 		//Checks if username is taken
 		if (self::checkUsernameTaken($dbconn, $user)){
-			echo 'Username already exists';
-			return 1;
+			return 'Username already exists';
 		}	
 		
 		//Makes sure pass is at least 3 characters
 		if( strlen( $pass ) < 3 ){
-			echo 'Password must contain at least 3 characters';
-			return 1;
+			return 'Password must contain at least 3 characters';
 		}
 		
 		//Stores the new user
 		self::storeUser($dbconn, $user, $pass, $group);
-		return 0;
 	}
 	
 	/**

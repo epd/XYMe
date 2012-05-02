@@ -3,15 +3,11 @@ include_once __DIR__ . '/lib/user.php';
 
 session_start();
 
-echo '<pre>';
-print_r($_POST);
-echo '</pre>';
-
 if(isset($_POST['login'])) {
-  if(User::login($_POST['username'], $_POST['password']));
+  $login = User::login($_POST['username'], $_POST['password']);
 }
 if(isset($_POST['register'])) {
-  echo User::register($_POST['username'], $_POST['password'], 1);
+  $register = User::register($_POST['username'], $_POST['password'], 1);
 }
 
 if(User::verifySession()) {
@@ -55,6 +51,17 @@ if(User::verifySession()) {
       </div>
       <section id="login">
         <h3>Login</h3>
+        <?php
+          if($login) {
+          ?>
+        <div class="error">
+        <?php
+            echo $login;
+        ?>
+        </div>
+        <?php
+          }
+        ?>
         <form action="index.php" id="login-form" class="user-form" method="post">
             <div class="input text">
               <label for="login-username">Username</label>
@@ -71,6 +78,17 @@ if(User::verifySession()) {
       </section>
       <section id="register">
         <h3>Register</h3>
+        <?php
+          if($register) {
+          ?>
+        <div class="error">
+        <?php
+            echo $register;
+        ?>
+        </div>
+        <?php
+          }
+        ?>
         <form action="index.php" id="register-form" class="user-form" method="post">
             <div class="input text">
               <label for="register-username">Username</label>
@@ -89,5 +107,16 @@ if(User::verifySession()) {
   </body>
 </html>
 <script type="text/javascript">
-$('#register').hide();
+  <?php
+    if(isset($_POST['register'])) {
+  ?>
+  $('#login').hide();
+  <?php
+  }
+    else {
+  ?>
+  $('#register').hide();
+  <?php
+    }
+  ?>
 </script>
