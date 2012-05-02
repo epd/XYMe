@@ -29,9 +29,39 @@ if( isset( $_POST['create'] ) &&  isset( $_POST['create-name'] ) ){
 }
 	
 
-
-
 ?>
+
+<script>
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+	} 
+		//Get the latitude and the longitude;
+	function successFunction(position) {
+		var lat = position.coords.latitude;
+		var lng = position.coords.longitude;
+		setCookie( 'xyme_lat', lat, 1 );
+		setCookie( 'xyme_lng', lng, 1 );
+	}
+
+	function errorFunction(){
+		alert("Geocoder failed");
+	}
+	
+	function setCookie(c_name,value,exdays)
+	{
+	var exdate=new Date();
+	exdate.setDate(exdate.getDate() + exdays);
+	var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+	document.cookie=c_name + "=" + c_value;
+	}
+	
+	
+</script>
+		
+
+
+
+
 <?php if( !User::verifySession() ) { ?>
 	<div id='login'>
 		<form action="test.php" method="post"> 
@@ -56,12 +86,13 @@ if( isset( $_POST['create'] ) &&  isset( $_POST['create-name'] ) ){
 	
 			<div id='create'>
 			<form action="test.php" method="post"> 
-				<label>Room Name:</label><input type='text' name='create-name'>
+				<label>Create Room Name: </label><input type='text' name='create-name'>
 				<input type='submit' value='Create' name='create'>
 			</form>
 		</div>
 		
 		<div id='closest'>
+			<b> Closest Rooms: </b><br />
 			<?php 
 				$rooms = User::closestRooms();
 				
