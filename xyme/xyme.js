@@ -24,6 +24,9 @@ if (Meteor.is_client) {
         // Reset the input for the next message
         e.target.value = '';
         e.target.focus();
+
+        // Make sure we scroll to the bottom
+        $(document).scrollTop($("#main-container").height());
       }
     }
   };
@@ -39,6 +42,11 @@ if (Meteor.is_client) {
         Session.set('name', data[1]);
       }
     }
+
+    // Make sure we scroll to the bottom
+    setTimeout(function () {
+      $(document).scrollTop($("#main-container").height());
+    }, 500);
   });
 }
 
