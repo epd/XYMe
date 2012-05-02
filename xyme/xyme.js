@@ -63,7 +63,8 @@ if (Meteor.is_client) {
 	var mapOptions = {
 		center: new google.maps.LatLng(Session.get('latitude'), Session.get('longitude')),
 		zoom: 14,
-		mapTypeId: google.maps.MapTypeId.ROADMAP
+		mapTypeId: google.maps.MapTypeId.ROADMAP,
+		disableDefaultUI: true
 	};
 	
 	var map = new google.maps.Map(document.getElementById("map_canvas"),
