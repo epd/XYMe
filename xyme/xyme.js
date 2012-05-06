@@ -1,15 +1,26 @@
 // Our collection via MongoDB
 Messages = new Meteor.Collection("messages");
-// Locations = new Meteor.Collection("locations");
+Locations = new Meteor.Collection("locations");
 
 if (Meteor.is_client) {
   // Expose object to the client
   window.Messages = Messages;
-//  window.Locations = Locations;
+  window.Locations = Locations;
 
   // Return all of our messages in order of time
   Template.messages.messages = function () {
     return Messages.find({}, {sort: {time: 1}});
+  };
+  Template.message.time = function () {
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var date = new Date(this.time);
+    var day = date.getDate();
+    var month = date.getMonth();
+    var year = date.getFullYear();
+    var am_pm = date.getHours() > 11 ? 'PM' : 'AM';
+    var hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+    var minutes = date.getMinutes(); 
+    return months[month] + ' ' + day + ', ' + year + ' @ ' + hours + ':' + minutes + am_pm;
   };
 
   // Listen for "Enter" pressed on message input
@@ -29,7 +40,10 @@ if (Meteor.is_client) {
 
         // Make sure we scroll to the bottom
         setTimeout(function () {
-          $(document).scrollTop($("#main-container").height());
+          var h = $("#messages").height() + $("#header-container").height();
+          if ($("#messages").height() > $(window).height() - $("#header-container").height() - $("#input").height()) {
+            $(document).scrollTop(h);
+          }
         }, 100);
       }
     }
@@ -63,25 +77,13 @@ if (Meteor.is_client) {
         Session.set('php_path', data[1]);
       }
     }
-	/*
-	var mapOptions = {
-		center: new google.maps.LatLng(Session.get('latitude'), Session.get('longitude')),
-		zoom: 14,
-		mapTypeId: google.maps.MapTypeId.ROADMAP,
-		disableDefaultUI: true
-	};
-	
-	var map = new google.maps.Map(document.getElementById("map_canvas"),
-        mapOptions);
-	
-	var marker = new google.maps.Marker({
-	  position: mapOptions.center,
-	  map: map
-	});*/
 
     // Make sure we scroll to the bottom
     setTimeout(function () {
-      $(document).scrollTop($("#main-container").height());
+      var h = $("#messages").height() + $("#header-container").height();
+      if ($("#messages").height() > $(window).height() - $("#header-container").height() - $("#input").height()) {
+        $(document).scrollTop(h);
+      }
     }, 500);
 
     // Click to logout

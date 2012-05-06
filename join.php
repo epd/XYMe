@@ -12,7 +12,7 @@ if(isset($_POST['logout']) && $_POST['logout'] == 'true' ) {
 
 // User not verified
 if( !User::verifySession() ) {
-  header("Location: http://" . $_SERVER['SERVER_NAME'] );
+  header("Location: " . $_COOKIE['xyme_php_path']);
 }
 
 // User added room
