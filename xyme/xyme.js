@@ -63,7 +63,7 @@ if (Meteor.is_client) {
   		time: new Date()
   	});
 	
-	/*var mapOptions = {
+	var mapOptions = {
 		center: new google.maps.LatLng(Session.get('latitude'), Session.get('longitude')),
 		zoom: 14,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -75,9 +75,8 @@ if (Meteor.is_client) {
 	
 	var marker = new google.maps.Marker({
 	  position: mapOptions.center,
-	  map: map,
-	  title: "Hello, bitches!"	
-	});*/
+	  map: map
+	});
 
     // Make sure we scroll to the bottom
     setTimeout(function () {
