@@ -158,7 +158,15 @@ class User {
 		  ':lat' => $_SESSION['latitude'],
 		  ':lng' => $_SESSION['longitude'],		  
 		));	
-
+		
+		$return_stmt = $dbconn->prepare('
+						SELECT LAST_INSERT_ID()
+					');
+		$return_stmt->execute();	
+		
+		$room_id = $return_stmt->fetch();
+		return $room_id[0];
+		
 	}
 	
 	public static function joinRoom( $room_id ){

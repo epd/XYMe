@@ -21,6 +21,14 @@ if( isset( $_POST['join'] ) ){
 
 }
 
+//Create Rooms
+if( isset( $_POST['create'] ) &&  isset( $_POST['create-name'] ) ){
+	$room_id = User::createRoom( $_POST['create-name'] );
+	User::joinRoom( $room_id );
+	header("Location: http://" . $_SERVER['SERVER_NAME'] . ":3000/" );	
+
+}
+
 
 
 
@@ -83,9 +91,16 @@ if( isset( $_POST['join'] ) ){
 					
 					echo "</form></tr>";
 				}
-				echo "</table>";
-					
+				echo "</table>";				
 			?>
+			
+		<div id='create'>
+			<form action="join.php" method="post"> 
+				<label>Create Room Name: </label><input type='text' name='create-name'>
+				<input type='submit' value='Create' name='create'>
+			</form>
+		</div>
+		
       </section>
     </div>
   </body>
@@ -104,6 +119,14 @@ table{
 #header{
 	border-bottom: 1px solid black;
 	
+}
+
+#create{
+	margin: 10px;
+	padding: 15px;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+
 }
 
 </style>
