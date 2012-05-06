@@ -30,8 +30,6 @@ if( isset( $_POST['create'] ) &&  isset( $_POST['create-name'] ) ){
 }
 
 
-
-
 ?>
 <!doctype html>
 <html>
@@ -79,17 +77,18 @@ if( isset( $_POST['create'] ) &&  isset( $_POST['create-name'] ) ){
 				
 				foreach( $rooms as $row ){
 				
-					echo "<tr><form action='join.php' method='post'>";
+					echo "<tr>";
 					echo "<td>".$row['room_name']."</td>"; 
 					echo "<td>".number_format($row['distance'], 2, '.', '')." miles</td>";							
 					if( $_SESSION['room_id'] == null  || !in_array( $row['room_id'], $_SESSION['room_id'] ) ){ 
+						echo "<form action='join.php' method='post'>";
 						echo "<input type='hidden' name='room_id' value='".$row['room_id']."'>";
 						echo "<td><input type='submit' name='join' value='Join'></td>";
+						echo "</form>";
 					} else {
 						echo "<td>In Room</td>";
-					}
-					
-					echo "</form></tr>";
+					}				
+					echo "</tr>";
 				}
 				echo "</table>";				
 			?>
