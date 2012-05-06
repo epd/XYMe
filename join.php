@@ -73,7 +73,7 @@ if( isset( $_POST['create'] ) &&  isset( $_POST['create-name'] ) ){
 			<?php 
 				$rooms = User::closestRooms();
 				
-				echo "<table><tr id='header'><th>Room Name</th><th>Distance</th><th class='last'>Join Room</th></tr>";
+				echo "<table><tr id='header'><th>Room Name</th><th>Distance</th><th>Join Room</th></tr>";
 				
 				foreach( $rooms as $row ){
 				
@@ -126,6 +126,10 @@ table{
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
 
+}
+
+table td{
+	padding-top: 10px;
 }
 
 </style>
