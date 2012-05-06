@@ -67,7 +67,7 @@ if( isset( $_POST['join'] ) ){
 			<?php 
 				$rooms = User::closestRooms();
 				
-				echo "<table><tr><th>Room Name</th><th>Distance</th><th>Join Room</th></tr>";
+				echo "<table><tr id='header'><th>Room Name</th><th>Distance</th><th class='last'>Join Room</th></tr>";
 				
 				foreach( $rooms as $row ){
 				
@@ -94,6 +94,19 @@ if( isset( $_POST['join'] ) ){
 <form id="logout" method="post" action="join.php" >
 	<input type="hidden" name="logout" value="true">
 </form>
+
+<style>
+table{
+	width: 100%;
+	text-align: center;
+}
+
+#header{
+	border-bottom: 1px solid black;
+	
+}
+
+</style>
 
 <script>
 	$("#logout-button").click(function(e){
