@@ -9,7 +9,7 @@ if (Meteor.is_client) {
 
   // Return all of our messages in order of time
   Template.messages.messages = function () {
-    return Messages.find({}, {sort: {time: 1}});
+    return Messages.find({room: Session.get('room_id')}, {sort: {time: 1}});
   };
   Template.message.time = function () {
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -31,7 +31,8 @@ if (Meteor.is_client) {
         Messages.insert({
           name: Session.get('name'),
           message: e.target.value,
-          time: new Date()
+          time: new Date(),
+          room: Session.get('room_id'),
         });
 
         // Reset the input for the next message
@@ -75,6 +76,9 @@ if (Meteor.is_client) {
 	    }
       if (data[0] === 'xyme_php_path') {
         Session.set('php_path', data[1]);
+      }
+      if (data[0] === 'xyme_room_id') {
+        Session.set('room_id', data[1]);
       }
     }
 
