@@ -170,22 +170,17 @@ class User {
 	}
 	
 	public static function joinRoom( $room_id ){
+		
+		$_SESSION['room_id'] = $room_id;
+		setcookie("xyme_room_id", $_SESSION['room_id'], time() + 3600, '/');
+					
+	}
 	
-		//Build array of their current rooms
-		if( $_SESSION['room_id'] == null )
-			$rooms = array();
-		else
-			$rooms = $_SESSION['room_id'];
-			
-		//Add new room to the array
-		$rooms = array_merge( $rooms, array( $room_id ) );
+		public static function leaveRoom(  ){
 		
-		//Fix Session
-		$_SESSION['room_id'] = $rooms;
-		
-		//Fix Cookie
-		setcookie("xyme_room_id", json_encode($_SESSION['room_id']), time() + 3600, '/');
-			
+		$_SESSION['room_id'] = null;
+		setcookie("xyme_room_id", null, time() + 3600, '/');
+					
 	}
 	
 	//---------------------------------------------------------------

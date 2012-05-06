@@ -96,7 +96,7 @@ header h1 {
   -moz-box-shadow: 0 2px rgba(255,255,255,.25);
   -webkit-box-shadow: 0 2px rgba(255,255,255,.25);
 }
-#login, #register {
+#login, #register, #room-list {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -118,7 +118,7 @@ header h1 {
   -moz-box-shadow: 0 0 20px rgba(0,0,0,0.5);
   -webkit-box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
-#login h3, #register h3 {
+#login h3, #register h3, #room-list h3, #room-map h3 {
   text-align: center;
   font: 36px/76px 'Aclonica', sans-serif;
   vertical-align: middle;

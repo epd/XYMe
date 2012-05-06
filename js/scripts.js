@@ -10,19 +10,49 @@ $(document).ready(function() {
     $("#login").hide();
     $("#register").show();
   });
-
-  $("#main-container").ready(function() {
-    var myLatLong = new google.maps.LatLng(42.7299534,-73.6767395);
-    var myOptions = {
-      zoom: 10,
-      center: new google.maps.LatLng(42.7299534,-73.6767395),
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-    var map = new google.maps.Map(document.getElementById("map_canvas"),
-            myOptions);
-  })
-  /*$('#map').googleMaps({
-    latitude: 42.351505,
-    longitude: -71.094455
-  }); */
+  
+  $("#logout-button").click(function(e){
+		$("#logout").submit()
+	});
+	
+	$('#room-list').hide();
+	$("#viewmap-button").click(function(e){
+		$('#room-map').hide();
+		$('#room-list').show();
+	});
+  
 });
+
+
+//--------------------------------
+//-- Gets Lat/Long and passes on -
+//--------------------------------
+function setpoint( lat, lng , content ){
+
+	
+		point= new google.maps.LatLng(lat,lng);		//Makes a point
+		map.setCenter(point);						//Centers map at that point
+		zoom = 6;									//Sets the zoom
+		marker = createMarker(point,content,zoom);	//Passes information
+
+	
+}
+
+
+//--------------------------------
+//-- Creates the marker ----------
+//--------------------------------
+function createMarker(latlng, content, zoom) {
+
+	//Creates the marker
+	var marker = new google.maps.Marker({
+		position: latlng,
+		map: map,
+	});
+
+	//Adds a listener for the infowindow
+	google.maps.event.addListener(marker, 'click', function() {
+		infowindow.setContent(content); 
+		infowindow.open(map,marker);
+	});
+}
