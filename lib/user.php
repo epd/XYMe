@@ -33,12 +33,14 @@ class User {
 		unset( $_SESSION['gid'] );
 		unset( $_SESSION['latitude'] );
 		unset( $_SESSION['longitude'] );
+		unset( $_SESSION['room_id'] );
 		session_destroy();
 		setcookie("xyme_user", FALSE, time() - 3600, '/');
 		setcookie("xyme_uid", FALSE, time() - 3600, '/');
 		setcookie("xyme_gid", FALSE, time() - 3600, '/');
 		setcookie("xyme_latitude", FALSE, time() - 3600, '/');
 		setcookie("xyme_longitude", FALSE, time() - 3600, '/');
+		setcookie("xyme_room_id", FALSE, time() - 3600, '/');
 	}
 	
 	/**
@@ -156,9 +158,36 @@ class User {
 		  ':lat' => $_SESSION['latitude'],
 		  ':lng' => $_SESSION['longitude'],		  
 		));	
-
-	}
 		
+		$return_stmt = $dbconn->prepare('
+						SELECT LAST_INSERT_ID()
+					');
+		$return_stmt->execute();	
+		
+		$room_id = $return_stmt->fetch();
+		return $room_id[0];
+		
+	}
+	
+	public static function joinRoom( $room_id ){
+	
+		//Build array of their current rooms
+		if( $_SESSION['room_id'] == null )
+			$rooms = array();
+		else
+			$rooms = $_SESSION['room_id'];
+			
+		//Add new room to the array
+		$rooms = array_merge( $rooms, array( $room_id ) );
+		
+		//Fix Session
+		$_SESSION['room_id'] = $rooms;
+		
+		//Fix Cookie
+		setcookie("xyme_room_id", json_encode($_SESSION['room_id']), time() + 3600, '/');
+			
+	}
+	
 	//---------------------------------------------------------------
 	//------------------- Private Funcitons -------------------------
 	//---------------------------------------------------------------
@@ -202,23 +231,15 @@ class User {
 			$_SESSION['gid'] = $row['group_id'];
 			$_SESSION['latitude'] = $_COOKIE['xyme_latitude'];
 			$_SESSION['longitude'] = $_COOKIE['xyme_longitude'];
+			$_SESSION['room_id'] = null;
 			setcookie("xyme_user", $_SESSION['user'], time() + 3600, '/');
 			setcookie("xyme_uid", $_SESSION['gid'], time() + 3600, '/');
 			setcookie("xyme_gid", $_SESSION['gid'], time() + 3600, '/');
+			setcookie("xyme_room_id", json_encode($_SESSION['room_id']) , time() + 3600, '/');
 			return 0;
 		}
 		else {
-			unset( $_SESSION['user'] );
-			unset( $_SESSION['uid'] );
-			unset( $_SESSION['gid'] );
-			unset( $_SESSION['latitude'] );
-			unset( $_SESSION['longitude'] );
-			session_destroy();
-			setcookie("xyme_user", FALSE, time() - 3600, '/');
-			setcookie("xyme_uid", FALSE, time() - 3600, '/');
-			setcookie("xyme_gid", FALSE, time() - 3600, '/');
-			setcookie("xyme_latitude", FALSE, time() - 3600, '/');
-			setcookie("xyme_longitude", FALSE, time() - 3600, '/');
+			self::logout();
 			return 1;		
 		}		
 	}

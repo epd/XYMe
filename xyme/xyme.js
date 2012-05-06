@@ -1,11 +1,11 @@
 // Our collection via MongoDB
 Messages = new Meteor.Collection("messages");
-Locations = new Meteor.Collection("locations");
+// Locations = new Meteor.Collection("locations");
 
 if (Meteor.is_client) {
   // Expose object to the client
   window.Messages = Messages;
-  window.Locations = Locations;
+//  window.Locations = Locations;
 
   // Return all of our messages in order of time
   Template.messages.messages = function () {
@@ -35,6 +35,14 @@ if (Meteor.is_client) {
     }
   };
 
+  
+	Locations.insert({
+		user: Session.get('name'),
+		latitude: Session.get('latitude'),
+		longitude: Session.get('longitude'),
+		time: new Date()
+	});
+
   Meteor.startup(function () {
     // Parse our cookie to grab username
     var cookie = document.cookie.split('; ');
@@ -55,15 +63,8 @@ if (Meteor.is_client) {
         Session.set('php_path', data[1]);
       }
     }
-
-  	Locations.insert({
-  		user: Session.get('name'),
-  		latitude: Session.get('latitude'),
-  		longitude: Session.get('longitude'),
-  		time: new Date()
-  	});
-	
-	/*var mapOptions = {
+	/*
+	var mapOptions = {
 		center: new google.maps.LatLng(Session.get('latitude'), Session.get('longitude')),
 		zoom: 14,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -75,8 +76,7 @@ if (Meteor.is_client) {
 	
 	var marker = new google.maps.Marker({
 	  position: mapOptions.center,
-	  map: map,
-	  title: "Hello, bitches!"	
+	  map: map
 	});*/
 
     // Make sure we scroll to the bottom

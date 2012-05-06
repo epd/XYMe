@@ -18,7 +18,7 @@ if(isset($_POST['logout'])) {
 }
 
 if(User::verifySession()) {
-  header("Location: http://" . $_SERVER['SERVER_NAME'] . ":3000/");
+  header("Location: http://" . $_SERVER['SERVER_NAME'] . "/join.php");
 }
 
 ?>
