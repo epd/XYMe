@@ -124,6 +124,9 @@ header h1 {
   width: 318px;
   margin: 0 auto;
 }
+#register {
+  margin-top: -260px;
+}
 .user-form input {
   display: block;
 }
@@ -133,9 +136,12 @@ header h1 {
   font-size: 16px;
 }
 .error {
-  color: #f00;
+  color: #c83535;
   font-weight: bold;
+  font-style: italic;
   text-align: center;
+  position: relative;
+  top: -8px;
 }
 .user-form div.text input,
 .user-form div.password input {

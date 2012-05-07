@@ -50,7 +50,7 @@ class Install {
     // Creat our users table
     $users_stmt = $dbconn->prepare('create table users (user_id int(11) not null
       auto_increment primary key, group_id int(11), room_id int(11), username
-      varchar(255), password varchar(255), latitude double, longitude double,
+      varchar(255), password varchar(255), image varchar(255), latitude double, longitude double,
       foreign key (group_id) references groups(group_id), foreign key (room_id)
       references rooms(room_id))');
 
@@ -103,11 +103,12 @@ class Install {
 
     // Insert our admin account
     $admin_stmt = $dbconn->prepare('insert into users values(null, :groupid,
-      null, :username, :password, null, null)');
+      null, :username, :password, :image, null, null)');
     $admin_stmt->execute(array(
       ':groupid' => 1,
       ':username' => $user,
       ':password' => $salted,
+      ':image' => 'http://www.handmenotes.com/sites/default/files/pictures/no_user.jpg',
     ));
   }
 

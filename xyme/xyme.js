@@ -33,6 +33,7 @@ if (Meteor.is_client) {
           message: e.target.value,
           time: new Date(),
           room: Session.get('room_id'),
+          image: Session.get('image')
         });
 
         // Reset the input for the next message
@@ -78,6 +79,9 @@ if (Meteor.is_client) {
       }
       if (data[0] === 'xyme_room_id') {
         Session.set('room_id', data[1]);
+      }
+      if (data[0] === 'xyme_image') {
+        Session.set('image', data[1]);
       }
     }
 

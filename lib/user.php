@@ -34,6 +34,7 @@ class User {
 		unset( $_SESSION['latitude'] );
 		unset( $_SESSION['longitude'] );
 		unset( $_SESSION['room_id'] );
+		unset( $_SESSION['image'] );
 		session_destroy();
 		setcookie("xyme_user", FALSE, time() - 3600, '/');
 		setcookie("xyme_uid", FALSE, time() - 3600, '/');
@@ -41,6 +42,7 @@ class User {
 		setcookie("xyme_latitude", FALSE, time() - 3600, '/');
 		setcookie("xyme_longitude", FALSE, time() - 3600, '/');
 		setcookie("xyme_room_id", FALSE, time() - 3600, '/');
+		setcookie("xyme_image", FALSE, time() - 3600, '/');
 	}
 	
 	/**
@@ -54,14 +56,14 @@ class User {
 	* The users group
 	*
 	*/
-	public static function register ( $user, $pass, $group ){
+	public static function register ( $user, $pass, $confirm, $group, $image ){
 	
 		//Connects to Database
 		$dbconn = self::connect();	
 		
 		//Makes sure all variables set
-		if( $user == null || $pass == null || $group == null ){
-			return 'Please Fill in all Fields';
+		if( $user == null || $pass == null || $group == null || $confirm == null || $image == null ) {
+			return 'Please make sure all fields are filled out';
 		}
 		
 		//Checks if username is taken
@@ -73,9 +75,19 @@ class User {
 		if( strlen( $pass ) < 3 ){
 			return 'Password must contain at least 3 characters';
 		}
+
+		// Make sure confirm password matches
+		if ($pass != $confirm) {
+			return 'Please make sure passwords match';
+		}
+
+		// Make sure image URI is valid
+		if (!preg_match("@^https?://(?:[a-z\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:jpg|gif|png)$@", $image)) {
+			return 'Please provide a valid image URI';
+		}
 		
 		//Stores the new user
-		self::storeUser($dbconn, $user, $pass, $group);
+		self::storeUser($dbconn, $user, $pass, $group, $image);
 	}
 	
 	/**
@@ -227,10 +239,12 @@ class User {
 			$_SESSION['latitude'] = $_COOKIE['xyme_latitude'];
 			$_SESSION['longitude'] = $_COOKIE['xyme_longitude'];
 			$_SESSION['room_id'] = null;
+			$_SESSION['image'] = $row['image'];
 			setcookie("xyme_user", $_SESSION['user'], time() + 3600, '/');
 			setcookie("xyme_uid", $_SESSION['gid'], time() + 3600, '/');
 			setcookie("xyme_gid", $_SESSION['gid'], time() + 3600, '/');
 			setcookie("xyme_room_id", json_encode($_SESSION['room_id']) , time() + 3600, '/');
+			setcookie("xyme_image", $_SESSION['image'], time() + 3600, '/');
 			return 0;
 		}
 		else {
@@ -257,12 +271,13 @@ class User {
 		
 		$salted = sha1($config['salt'] . $pass);
 
-		$register_stmt = $dbconn->prepare('insert into users (group_id, username, password) values( :groupid,
-		  :username, :password)');
+		$register_stmt = $dbconn->prepare('insert into users (group_id, username, password, image) values( :groupid,
+		  :username, :password, :image)');
 		$register_stmt->execute(array(
 		  ':groupid' => $group,
 		  ':username' => $user,
 		  ':password' => $salted,
+		  ':image' => $image,
 		));	
 	}
 	

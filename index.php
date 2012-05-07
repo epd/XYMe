@@ -11,7 +11,7 @@ if( isset($_POST['login']) && $_POST['login'] == 'Login' ) {
   $login = User::login($_POST['username'], $_POST['password']);
 }
 if( isset($_POST['register']) && $_POST['register'] == 'Register' ) {
-  $register = User::register($_POST['username'], $_POST['password'], 1);
+  $register = User::register($_POST['username'], $_POST['password'], $_POST['confirm'], 1, $_POST['image']);
 }
 if(isset($_POST['logout'])) {
   User::logout();
@@ -105,6 +105,14 @@ if(User::verifySession()) {
             <div class="input password">
               <label for="register-password">Password</label>
               <input name="password" type="password" id="register-password"/>
+            </div>
+            <div class="input password">
+              <label for="register-confirm">Confirm</label>
+              <input name="confirm" type="password" id="register-confirm" />
+            </div>
+            <div class="input text">
+              <label for="register-image">Avatar URI</label>
+              <input name="image" type="text" id="register-image"/>
             </div>
             <div class="submit">
               <input name="register" class="register" type="submit" value="Register"/>
