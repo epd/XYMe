@@ -22,6 +22,9 @@ if (Meteor.is_client) {
     var minutes = date.getMinutes(); 
     return months[month] + ' ' + day + ', ' + year + ' @ ' + hours + ':' + minutes + am_pm;
   };
+  Template.header.rooms_uri = function () {
+    return Session.get('php_path') + '/join.php';
+  };
 
   // Listen for "Enter" pressed on message input
   Template.input.events = {
