@@ -127,6 +127,13 @@ if( isset( $_POST['create'] ) &&  isset( $_POST['create-name'] ) ){
 		</script>
 			
       </section>
+
+    <div id='create'>
+      <form action="join.php" method="post"> 
+        <label>Create Room Name: </label><input type='text' name='create-name'>
+        <input type='submit' value='Create' name='create'>
+      </form>
+    </div>
 	  
 	  <section id="room-list">
         <h3> Closest Rooms: </h3>
@@ -148,13 +155,6 @@ if( isset( $_POST['create'] ) &&  isset( $_POST['create-name'] ) ){
 				}
 				echo "</table>";				
 			?>
-			
-		<div id='create'>
-			<form action="join.php" method="post"> 
-				<label>Create Room Name: </label><input type='text' name='create-name'>
-				<input type='submit' value='Create' name='create'>
-			</form>
-		</div>		
       </section>
 	  
 
@@ -166,32 +166,3 @@ if( isset( $_POST['create'] ) &&  isset( $_POST['create-name'] ) ){
 <form id="logout" method="post" action="join.php" >
 	<input type="hidden" name="logout" value="true">
 </form>
-
-<style>
-table{
-	width: 100%;
-	text-align: center;
-}
-
-#header{
-	border-bottom: 1px solid black;
-	
-}
-
-#create{
-	margin: 10px;
-	padding: 15px;
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
-
-}
-
-table td{
-	padding-top: 10px;
-}
-
-</style>
-
-
-
-

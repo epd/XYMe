@@ -115,10 +115,18 @@ header h1 {
   -moz-box-shadow: 0 0 20px rgba(0,0,0,0.5);
   -webkit-box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
+#room-list {
+  top: 400px;
+  width: 600px;
+  margin-left: -300px;
+}
 #login h3, #register h3, #room-list h3, #room-map h3 {
   text-align: center;
   font: 36px/76px 'Aclonica', sans-serif;
   vertical-align: middle;
+}
+#room-map h3 {
+  text-align: left;
 }
 #login-form, #register-form {
   width: 318px;
@@ -187,4 +195,31 @@ header h1 {
 }
 .clear {
   clear: both;
+}
+
+table{
+  width: 100%;
+  text-align: center;
+}
+
+#header{
+  border-bottom: 1px solid black;
+  
+}
+
+#create {
+  position: absolute;
+  top: 200px;
+  width: 960px;
+}
+#create form {
+  text-align: right;
+}
+
+table td{
+  padding-top: 10px;
+}
+
+#create {
+
 }
