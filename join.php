@@ -119,7 +119,7 @@ if( isset( $_POST['create'] ) &&  isset( $_POST['create-name'] ) ){
 			for (i = 0; i < locations.length; i++) { 
 				
 				//Sets the content for the info window
-				var content = "<form action='join.php' method='post'><input type='hidden' name='room_id' value='" + locations[i][3] + "'><input type='submit' name='join' value='Join Room'></td></form>";	
+				var content = "<form action='join.php' method='post'>" + locations[i][0] + "- <input type='hidden' name='room_id' value='" + locations[i][3] + "'><input type='submit' name='join' value='Join Room'></td></form>";	
 				setpoint( locations[i][1], locations[i][2], content  );
 				  
 			} 
