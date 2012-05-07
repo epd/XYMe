@@ -41,11 +41,10 @@ if (Meteor.is_client) {
 
         // Make sure we scroll to the bottom
         setTimeout(function () {
-          var h = $("#messages").height() + $("#header-container").height();
           if ($("#messages").height() > $(window).height() - $("#header-container").height() - $("#input").height()) {
-            $(document).scrollTop(h);
+            $(document).scrollTop($("#messages").height());
           }
-        }, 100);
+        }, 200);
       }
     }
   };
@@ -84,11 +83,10 @@ if (Meteor.is_client) {
 
     // Make sure we scroll to the bottom
     setTimeout(function () {
-      var h = $("#messages").height() + $("#header-container").height();
       if ($("#messages").height() > $(window).height() - $("#header-container").height() - $("#input").height()) {
-        $(document).scrollTop(h);
+        $(document).scrollTop($("#messages").height());
       }
-    }, 500);
+    }, 600);
 
     // Click to logout
     $(document).on('click', '#button-left', function(e) {
