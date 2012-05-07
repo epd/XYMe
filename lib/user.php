@@ -82,7 +82,7 @@ class User {
 		}
 
 		// Make sure image URI is valid
-		if (!preg_match("@^https?://(?:[a-z\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:jpg|gif|png)$@", $image)) {
+		if (!preg_match("@^(htt(ps|p)://)(\w+)[.](\w+[.]|\w+[/])+(jpg|gif|png)$@", $image)) {
 			return 'Please provide a valid image URI';
 		}
 		
@@ -266,7 +266,7 @@ class User {
 	* The users group
 	*
 	*/
-	private static function storeUser ( $dbconn, $user, $pass, $group ){
+	private static function storeUser ( $dbconn, $user, $pass, $group, $image ){
 		require __DIR__ . '/../config.php';
 		
 		$salted = sha1($config['salt'] . $pass);
@@ -278,7 +278,9 @@ class User {
 		  ':username' => $user,
 		  ':password' => $salted,
 		  ':image' => $image,
-		));	
+		));
+
+		header("Location: /");
 	}
 	
 	/**
