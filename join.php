@@ -106,9 +106,15 @@ if( isset( $_POST['create'] ) &&  isset( $_POST['create-name'] ) ){
 			
 			//Initial Settings
 			var map = new google.maps.Map(document.getElementById('map_canvas'), {
-				zoom: 14,
-				center: new google.maps.LatLng(42.2852, -71.7214),
-				mapTypeId: google.maps.MapTypeId.ROADMAP
+				zoom: 15,
+				//center: new google.maps.LatLng(42.2852, -71.7214),
+				mapTypeId: google.maps.MapTypeId.ROADMAP,
+        panControl: false,
+        zoomControl: false,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        overviewMapControl: true
 			});
 			
 			
