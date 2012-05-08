@@ -52,12 +52,19 @@ if( isset( $_POST['create'] ) &&  isset( $_POST['create-name'] ) ){
                 </div>
               </div>
             </div>
+            <div id="viewlist-button" class="button right">
+              <div class="button-outer">
+                <div class="button-inner">
+				          <img class="left" src="img/list.png"/>
+                  <span class="button-text right">View List</span>	
+                </div>
+              </div>
+            </div>
             <div id="viewmap-button" class="button right">
               <div class="button-outer">
                 <div class="button-inner">
-                
-				  <img class="left" src="img/register.png"/>
-                  <span class="button-text right">View List</span>	
+                  <img class="left" src="img/map.png"/>
+                  <span class="button-text right">View Map</span>  
                 </div>
               </div>
             </div>

@@ -16,10 +16,19 @@ $(document).ready(function() {
 	});
 	
 	$('#room-list').hide();
-	$("#viewmap-button").click(function(e){
+  $('#viewmap-button').hide();
+	$("#viewlist-button").click(function(e){
 		$('#room-map').hide();
 		$('#room-list').show();
+    $('#viewlist-button').hide();
+    $('#viewmap-button').show();
 	});
+  $("#viewmap-button").click(function(e){
+    $('#room-list').hide();
+    $('#room-map').show();
+    $('#viewmap-button').hide();
+    $('#viewlist-button').show();
+  });
   
 });
 
